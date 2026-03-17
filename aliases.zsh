@@ -198,5 +198,32 @@ alias wtrf="wt rm -f"
 alias wtp="wt purge"
 alias wtpr="wt pr -s"
 
+# tmux
+alias ta='tmux attach -t main || tmux new -s main'
+alias tl='tmux ls'
+alias tk='tmux kill-session -t'
+alias tn='tmux new -s'
+alias tat='tmux attach -t'
+alias tr='tmux source-file ~/.tmux.conf && tmux display-message "Reloaded!"'
+alias th='${EDITOR:-vim} ~/tmux-shortcuts.md'
+
+t() {
+  local raw_name="${1:-${PWD##*/}}"
+  local name="${raw_name##.}"
+  name="${name//[^[:alnum:]_-]/_}"
+  [[ -z "$name" ]] && name="main"
+
+  tmux has-session -t "$name" 2>/dev/null || tmux new-session -d -s "$name"
+  if [[ -n "$TMUX" ]]; then
+    tmux switch-client -t "$name"
+  else
+    tmux attach -t "$name"
+  fi
+}
+
+tka() {
+  tmux ls 2>/dev/null | awk -F: '/\(detached\)/ {print $1}' | xargs -n1 tmux kill-session -t
+}
+
 alias cx="codex --dangerously-bypass-approvals-and-sandbox"
 alias oct="openclaw tui"
