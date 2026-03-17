@@ -17,12 +17,6 @@ alias la="ls -lah"    # Long format, including hidden files
 alias lt="ls -lhtr"   # Sort by time, newest last
 alias lsd="ls -ld */" # List only directories
 
-# File operations
-alias cp="cp -iv"       # Interactive and verbose copy
-alias mv="mv -iv"       # Interactive and verbose move
-alias rm="rm -iv"       # Interactive and verbose remove
-alias mkdir="mkdir -pv" # Create parent directories as needed, verbose
-
 # ===== Development Tools =====
 
 # Python
