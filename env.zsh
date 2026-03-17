@@ -9,7 +9,7 @@ setopt AUTO_CD # Allow changing directories without 'cd'
 # Editor configuration
 export EDITOR=zed
 export VISUAL=zed
-export BROWSER=arc
+export BROWSER=open
 
 # GPG signing
 export GPG_TTY=$(tty)
