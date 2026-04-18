@@ -123,8 +123,6 @@ alias cur="cursor"
 # Lazygit
 alias lg="lazygit"
 
-# Git with hub extension
-alias git="hub"
 alias gs="git status -sb" # Short status with branch info
 alias ga="git add"
 alias gaa="git add --all" # Add all changes
