@@ -19,65 +19,6 @@ alias lsd="ls -ld */" # List only directories
 
 # ===== Development Tools =====
 
-# Python
-alias pip="pip3"
-alias python="python3"
-alias py="python3"
-alias pyenv="python -m venv venv && source venv/bin/activate" # Create and activate virtual environment
-
-# PNPM - Package manager
-alias p="pnpm"
-alias px="pnpx"
-alias pa="pnpm add"
-alias pad="pnpm add --save-dev"
-alias pap="pnpm add --save-peer"
-alias pga="pnpm add --global"
-alias pgrm="pnpm remove --global"
-alias pu="pnpm upgrade"
-alias pui="pnpm upgrade --interactive"
-alias puli="pnpm upgrade --latest --interactive"
-alias pul="pnpm upgrade --latest"
-alias prm="pnpm remove"
-alias pout="pnpm outdated"
-alias pls="pnpm list"
-alias pi="pnpm install"
-alias pr="pnpm run"
-alias pt="pnpm run test"
-alias pb="pnpm run build"
-alias pbw="pnpm run build:watch"
-alias pp="pnpm run package --"
-alias pd="pnpm run dev --"
-alias pub="pnpm publish"
-alias pv="pnpm version"
-
-# NPM - Node package manager
-alias n="npm"
-alias nx="npx"
-alias ni="npm install"
-alias nid="npm install --save-dev"
-alias nis="npm install --save"
-alias nig="npm install --global"
-alias nr="npm run"
-alias nt="npm run test"
-alias nb="npm run build"
-alias nd="npm run dev"
-alias nstart="npm start"
-alias nstop="npm stop"
-alias nrestart="npm restart"
-alias nrm="npm remove"
-alias nrmg="npm remove --global"
-alias nu="npm update"
-alias nout="npm outdated"
-alias nls="npm list"
-alias nlsg="npm list --global"
-alias nv="npm version"
-alias np="npm publish"
-alias nci="npm ci"
-alias naudit="npm audit"
-alias nauditf="npm audit fix"
-alias ninit="npm init"
-alias ninity="npm init -y"
-
 # Bun - JavaScript runtime & package manager
 alias b="bun"
 alias bx="bunx"
@@ -102,20 +43,16 @@ alias td="turbo dev"
 alias tb="turbo build"
 
 # Other tools
-alias pf="promptfoo"
-alias ws="windsurf"
 alias oc="openclaw"
-alias oct="openclaw tui"
 alias ocd="opencode"
 
 # Claude CLI
 alias c="claude"
-alias cc="claude -c"
+alias clc="claude -c"
 alias cr="claude -r"
 alias cy="claude --permission-mode bypassPermissions"
 alias ccy="claude -c --permission-mode bypassPermissions"
 alias cry="claude -r --permission-mode bypassPermissions"
-alias ca="cursor-agent"
 alias cur="cursor"
 
 # ===== Git & Version Control =====
@@ -132,7 +69,6 @@ alias gp="git push"
 alias gpf="git push --force-with-lease" # Safer force push
 alias gl="git pull"
 alias gf="git fetch --all" # Fetch all remotes
-alias gfom="git fetch origin main:main" # Fetch origin main to local main
 alias gd="git diff"
 alias gds="git diff --staged" # Diff staged changes
 alias gb="git branch"
@@ -170,8 +106,6 @@ alias tfa="terraform apply"
 # System
 alias dud="du -d 1 -h"          # Disk usage by directory, human readable
 alias duf="du -sh *"            # Disk usage by file, human readable
-alias fd="find . -type d -name" # Find directories
-alias ff="find . -type f -name" # Find files
 
 # Process management
 alias psa="ps aux"        # List all processes
@@ -184,7 +118,6 @@ alias ports="lsof -i -P -n | grep LISTEN"  # Show listening ports
 
 # Tailscale
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # Vibe Kanban
 alias vk="bx vibe-kanban"
@@ -221,6 +154,20 @@ t() {
 
 tka() {
   tmux ls 2>/dev/null | awk -F: '/\(detached\)/ {print $1}' | xargs -n1 tmux kill-session -t
+}
+
+tsend() {
+  tmux send-keys -t "$1" -l -- "$2"
+  sleep 0.1
+  tmux send-keys -t "$1" Enter
+}
+
+tpeek() {
+  tmux capture-pane -t "$1" -p | awk 'NF{last=NR} {arr[NR]=$0} END{for(i=1;i<=last;i++) print arr[i]}' | tail -"${2:-20}"
+}
+
+tfull() {
+  tmux capture-pane -t "$1" -p -S -
 }
 
 alias cx="codex --dangerously-bypass-approvals-and-sandbox"
