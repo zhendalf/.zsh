@@ -38,22 +38,15 @@ alias bag="bun add -g"
 alias bit="bun init"
 alias bity="bun init -y"
 
-# Turbo - Monorepo tool
-alias td="turbo dev"
-alias tb="turbo build"
-
 # Other tools
 alias oc="openclaw"
 alias ocd="opencode"
 
 # Claude CLI
-alias c="claude"
-alias clc="claude -c"
-alias cr="claude -r"
-alias cy="claude --permission-mode bypassPermissions"
+alias c="claude --permission-mode bypassPermissions"
 alias ccy="claude -c --permission-mode bypassPermissions"
 alias cry="claude -r --permission-mode bypassPermissions"
-alias cur="cursor"
+alias ccp="claude --permission-mode bypassPermissions -p"
 
 # ===== Git & Version Control =====
 
